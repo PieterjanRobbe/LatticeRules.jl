@@ -6,6 +6,9 @@ struct ShiftedLatticeRule32{s, L, V} <: AbstractLatticeRule{s}
     Δ::V
 end
 
+# default shifted lattice rule type
+const ShiftedLatticeRule = ShiftedLatticeRule32
+
 # access max number of points in the lattice
 Base.length(shifted_lattice_rule::ShiftedLatticeRule32) = length(shifted_lattice_rule.lattice_rule)
 

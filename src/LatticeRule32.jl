@@ -6,6 +6,9 @@ struct LatticeRule32{s} <: AbstractLatticeRule{s}
     n::Int64 # max number of points in the lattice rule
 end
 
+# default lattice rule type
+const LatticeRule = LatticeRule32
+
 # access max number of points in the lattice
 Base.length(lattice_rule::LatticeRule32) = lattice_rule.n
 
