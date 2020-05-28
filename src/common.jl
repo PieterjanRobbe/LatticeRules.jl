@@ -11,12 +11,11 @@ Base.size(lattice_rule::AbstractLatticeRule) = (length(lattice_rule), )
 
 # reverse bits (https://graphics.stanford.edu/~seander/bithacks.html#ReverseParallel)
 reversebits(u::UInt32) = begin
-    r = u
-    r = ((r >> 1) & 0x55555555) | ((r & 0x55555555) << 1)
-    r = ((r >> 2) & 0x33333333) | ((r & 0x33333333) << 2)
-    r = ((r >> 4) & 0x0F0F0F0F) | ((r & 0x0F0F0F0F) << 4)
-    r = ((r >> 8) & 0x00FF00FF) | ((r & 0x00FF00FF) << 8)
-    r = ( r >> 16             ) | ( r               << 16)
+    u = ((u >> 1) & 0x55555555) | ((u & 0x55555555) << 1)
+    u = ((u >> 2) & 0x33333333) | ((u & 0x33333333) << 2)
+    u = ((u >> 4) & 0x0F0F0F0F) | ((u & 0x0F0F0F0F) << 4)
+    u = ((u >> 8) & 0x00FF00FF) | ((u & 0x00FF00FF) << 8)
+    u = ( u >> 16             ) | ( u               << 16)
 end
 
 # read contents of file containing a generating vector and convert it to a Vector of UInt32's

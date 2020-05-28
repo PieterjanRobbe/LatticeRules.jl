@@ -9,6 +9,7 @@ using LatticeRules, SpecialFunctions, Statistics, Test
             lattice_rule = LatticeRule32([UInt32(1), UInt32(5)], 2, 8)
             @test ndims(lattice_rule) == 2
             @test length(lattice_rule) == 8
+            @test size(lattice_rule) == (8,)
         end
 
         # test constructor with generating vector and number of dimensions
@@ -68,6 +69,7 @@ using LatticeRules, SpecialFunctions, Statistics, Test
             for i in lattice_rule
                 nothing
             end
+            @test all(first(lattice_rule) .== lattice_rule[0])
         end
 
         # test lattice_rule[i] access
