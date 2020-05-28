@@ -49,10 +49,9 @@ julia> getpoint(shifted_lattice_rule, 0)
  0.20947237319807077
 
 ```
-See also: [`LatticeRule32`](@ref), [`get_point`](@ref)
+See also: [`LatticeRule32`](@ref), [`getpoint`](@ref)
 """
-# specify lattice rule
-ShiftedLatticeRule32(lattice_rule::LatticeRule32{s}) where s = ShiftedLatticeRule32(lattice_rule, rand(s))
+ShiftedLatticeRule32(lattice_rule::LatticeRule32{s}) where s = ShiftedLatticeRule32(lattice_rule, rand(s)) # specify lattice rule
 
 # specify lattice rule and random shift
 function ShiftedLatticeRule32(lattice_rule::LatticeRule32{s}, Δ::Vector{<:AbstractFloat}) where s
@@ -69,7 +68,7 @@ Returns a shifted rank-1 lattice rule in `s` dimensions that uses a default gene
 # Examples
 ```jldoctest; setup = :(using LatticeRules; import Random; Random.seed!(1))
 julia> shifted_lattice_rule = ShiftedLatticeRule32(16)
-LatticeRule32{16}
+ShiftedLatticeRule32{16}
 
 julia> shifted_lattice_rule[0]
 16-element Array{Float64,1}:
@@ -93,8 +92,7 @@ julia> shifted_lattice_rule[0]
 ```
 See also: [`getpoint`](@ref), [`ShiftedLatticeRule32`](@ref)
 """
-# specify number of dimensions only
-ShiftedLatticeRule32(s::Integer) = ShiftedLatticeRule32(LatticeRule32(s))
+ShiftedLatticeRule32(s::Integer) = ShiftedLatticeRule32(LatticeRule32(s)) # specify number of dimensions only
 
 # in-place version of unsafe_getpoint (with 0 memory allocations)
 @inline function unsafe_getpoint!(x::Vector{<:AbstractFloat}, shifted_lattice_rule::ShiftedLatticeRule32, k::UInt32)

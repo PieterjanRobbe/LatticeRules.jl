@@ -1,5 +1,5 @@
-using LatticeRules
 using Documenter
+using LatticeRules
 
 makedocs(;
     modules=[LatticeRules],

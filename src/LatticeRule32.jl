@@ -43,8 +43,7 @@ julia> getpoint(lattice_rule, 2)
 ```
 See also: [`getpoint`](@ref), [`ShiftedLatticeRule32`](@ref)
 """
-# specify generating vector
-LatticeRule32(z::Vector{UInt32}) = LatticeRule32(z, length(z))
+LatticeRule32(z::Vector{UInt32}) = LatticeRule32(z, length(z)) # specify generating vector
 
 # specify generating vector and number of dimensions
 LatticeRule32(z::Vector{UInt32}, s::Integer) = LatticeRule32(z, s, typemax(UInt32) + 1)
@@ -94,8 +93,7 @@ julia> getpoint(lattice_rule, 123)
 ```
 See also: [`getpoint`](@ref), [`ShiftedLatticeRule32`](@ref)
 """
-# specify file containing generating vector
-LatticeRule32(file::AbstractString) = LatticeRule32(read32(file))
+LatticeRule32(file::AbstractString) = LatticeRule32(read32(file)) # specify file containing generating vector
 
 # specify file containting generating vector and number of dimensions
 LatticeRule32(file::AbstractString, s::Integer) = LatticeRule32(read32(file), s)
@@ -116,27 +114,26 @@ LatticeRule32{16}
 julia> getpoint(lattice_rule, 123)
 16-element Array{Float64,1}:
  0.8671875
- 0.9609375
+ 0.5390625
  0.6015625
- 0.8984375
- 0.6484375
+ 0.3671875
+ 0.6796875
+ 0.8203125
+ 0.3046875
+ 0.8515625
+ 0.7109375
  0.6328125
- 0.3203125
- 0.2890625
- 0.0234375
- 0.1015625
- 0.7890625
- 0.0703125
+ 0.5703125
+ 0.2578125
  0.6953125
- 0.0234375
- 0.1171875
- 0.0859375
+ 0.0390625
+ 0.2421875
+ 0.4453125
 
 ```
 See also: [`getpoint`](@ref), [`ShiftedLatticeRule32`](@ref)
 """
-# specify number of dimensions only
-function LatticeRule32(s::Integer)
+function LatticeRule32(s::Integer) # specify number of dimensions only
     s ≤ 3600 || throw(ArgumentError("number of dimensions s must be less than or equal to 3600, please supply your own generating vector z"))
     s ≤ 250 ? LatticeRule32(CKN_250_20, s, 2^20) : LatticeRule32(K_3600_32, s)
 end

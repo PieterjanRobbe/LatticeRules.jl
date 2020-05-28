@@ -78,7 +78,7 @@ using LatticeRules, SpecialFunctions, Statistics, Test
             @test length(lattice_rule[0]) == 2
             @inferred lattice_rule[100]
             @test length(lattice_rule[end]) == 2
-            @test length(first(lattice_rule)) == 2
+            @test firstindex(lattice_rule) == 0
             @test length(lattice_rule[1:20]) == 20
             @test length(collect(lattice_rule)) == 2^20
         end

@@ -37,13 +37,12 @@ LatticeRule32{2}
 julia> getpoint(lattice_rule, 3)
 2-element Array{Float64,1}:
  0.75
- 0.5
+ 0.25
 
 ```
 See also: [`LatticeRule32`](@ref), [`ShiftedLatticeRule32`](@ref)
 """
-# get the k-th point of the lattice sequence
-@inline function getpoint(lattice_rule::AbstractLatticeRule, k::Number)
+@inline function getpoint(lattice_rule::AbstractLatticeRule, k::Number) # get the k-th point of the lattice sequence
     0 ≤ k < length(lattice_rule) || throw(BoundsError(lattice_rule, k))
     unsafe_getpoint(lattice_rule, convert(uinttype(lattice_rule), k))
 end
