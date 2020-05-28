@@ -3,5 +3,8 @@ uuid = "73f95e8e-ec14-4e6a-8b18-0d2e271c4e55"
 authors = ["Pieterjan Robbe <pieterjan.robbe@kuleuven.be> and contributors"]
 version = "0.0.0"
 
+[deps]
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+
 [compat]
 julia = "1.2"
