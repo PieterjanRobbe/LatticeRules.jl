@@ -22,7 +22,12 @@ uinttype(::LatticeRule32) = UInt32
 
 Returns a rank-1 lattice rule in `s` dimensions with generating vector `z` and at most `n` points.
 
-When no maximum number of points `n` is provided, we assume `n = typemax(UInt32) = 2^32 - 1`. When no number of dimensions `s` is provided, we assume `s = length(z)`. 
+When no maximum number of points `n` is provided, we assume `n = Int64(typemax(UInt32)) + 1 = 2^32`.
+
+!!! note
+
+    On 32-bit Julia, `typemax(UInt32) + 1` wraps to `0x00000000` because `1` is `Int32`.
+    Always widen to `Int64` before adding so the default limit stays `2^32` on every word size. When no number of dimensions `s` is provided, we assume `s = length(z)`. 
 
 !!! info
 
@@ -46,14 +51,14 @@ See also: [`getpoint`](@ref), [`ShiftedLatticeRule32`](@ref)
 LatticeRule32(z::Vector{UInt32}) = LatticeRule32(z, length(z)) # specify generating vector
 
 # specify generating vector and number of dimensions
-LatticeRule32(z::Vector{UInt32}, s::Integer) = LatticeRule32(z, s, typemax(UInt32) + 1)
+LatticeRule32(z::Vector{UInt32}, s::Integer) = LatticeRule32(z, s, Int64(typemax(UInt32)) + one(Int64))
 
 # specify generating vector, number of dimensions and maximum number of points
 function LatticeRule32(z::Vector{UInt32}, s::Integer, n::Integer)
     s > 0 || throw(ArgumentError("number of dimensions s must be larger than 0"))
     s ≤ length(z) || throw(ArgumentError("number of dimensions s must be less than or equal to the length of the generating vector z"))
     n > 0 || throw(ArgumentError("maximum number of points n must be larger than 0"))
-    n ≤ typemax(UInt32) + 1 || throw(ArgumentError("maximum number of points n must be less than or equal to 2^32, consider implementing a LatticeRule64 type"))
+    n ≤ Int64(typemax(UInt32)) + one(Int64) || throw(ArgumentError("maximum number of points n must be less than or equal to 2^32, consider implementing a LatticeRule64 type"))
     LatticeRule32{s}(view(z, 1:s), n)
 end
 
