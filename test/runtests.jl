@@ -12,6 +12,13 @@ using LatticeRules, SpecialFunctions, Statistics, Test
             @test size(lattice_rule) == (8,)
         end
 
+        # regression test for 32-bit wrap of typemax(UInt32) + 1 (see PR #5)
+        @testset "default max number of points (2^32, word-size agnostic)" begin
+            @test 2^32 == Int64(typemax(UInt32)) + one(Int64)
+            # default-n constructor must yield 2^32, not 0 (which wraps on 32-bit)
+            @test length(LatticeRule([UInt32(1)], 1)) == 2^32
+        end
+
         # test constructor with generating vector and number of dimensions
         @testset "LatticeRule(z, s)" begin
             lattice_rule = LatticeRule(K_3600_32, 16)
