@@ -14,30 +14,30 @@ using LatticeRules, SpecialFunctions, Statistics, Test
 
         # regression test for 32-bit wrap of typemax(UInt32) + 1 (see PR #5)
         @testset "default max number of points (2^32, word-size agnostic)" begin
-            @test 2^32 == Int64(typemax(UInt32)) + one(Int64)
+            @test Int64(2)^32 == Int64(typemax(UInt32)) + one(Int64)
             # default-n constructor must yield 2^32, not 0 (which wraps on 32-bit)
-            @test length(LatticeRule([UInt32(1)], 1)) == 2^32
+            @test length(LatticeRule([UInt32(1)], 1)) == Int64(2)^32
         end
 
         # test constructor with generating vector and number of dimensions
         @testset "LatticeRule(z, s)" begin
             lattice_rule = LatticeRule(K_3600_32, 16)
             @test ndims(lattice_rule) == 16
-            @test length(lattice_rule) == 2^32
+            @test length(lattice_rule) == Int64(2)^32
         end
 
         # test constructor with generating vector only
         @testset "LatticeRule(z)" begin
             lattice_rule = LatticeRule(K_3600_32, 250)
             @test ndims(lattice_rule) == 250
-            @test length(lattice_rule) == 2^32
+            @test length(lattice_rule) == Int64(2)^32
         end
 
         # test constructor with number of dimensions only
         @testset "LatticeRule(s)" begin
             lattice_rule = LatticeRule(251)
             @test ndims(lattice_rule) == 251
-            @test length(lattice_rule) == 2^32
+            @test length(lattice_rule) == Int64(2)^32
         end
 
         # test constructor with file containing generating vector, number of dimensions and max number of points
@@ -51,14 +51,14 @@ using LatticeRules, SpecialFunctions, Statistics, Test
         @testset "LatticeRule(z_file, s)" begin
             lattice_rule = LatticeRule(K_3600_32_file, 16)
             @test ndims(lattice_rule) == 16
-            @test length(lattice_rule) == 2^32
+            @test length(lattice_rule) == Int64(2)^32
         end
 
         # test constructor with file containing generating vector only
         @testset "LatticeRule(z_file)" begin
             lattice_rule = LatticeRule(K_3600_32_file)
             @test ndims(lattice_rule) == 3600
-            @test length(lattice_rule) == 2^32
+            @test length(lattice_rule) == Int64(2)^32
         end
 
         # test getpoint
@@ -100,7 +100,7 @@ using LatticeRules, SpecialFunctions, Statistics, Test
             @test_throws ArgumentError LatticeRule(3601)
             @test_throws ArgumentError LatticeRule(CKN_250_20, 251)
             @test_throws ArgumentError LatticeRule(CKN_250_20_file, 12 ,0)
-            @test_throws ArgumentError LatticeRule(K_3600_32, 251, 2^32 + 1)
+            @test_throws ArgumentError LatticeRule(K_3600_32, 251, Int64(2)^32 + 1)
         end
 
         # test print method
@@ -133,7 +133,7 @@ using LatticeRules, SpecialFunctions, Statistics, Test
         @testset "ShiftedLatticeRule(s)" begin
             shifted_lattice_rule = ShiftedLatticeRule(251)
             @test ndims(shifted_lattice_rule) == 251
-            @test length(shifted_lattice_rule) == 2^32
+            @test length(shifted_lattice_rule) == Int64(2)^32
         end
 
         # test getpoint
