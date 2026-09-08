@@ -41,7 +41,7 @@ julia> lattice_rule = LatticeRule32([UInt32(1), UInt32(5)], 2, 8) # Fibonacci la
 LatticeRule32{2}
 
 julia> getpoint(lattice_rule, 2)
-2-element Array{Float64,1}:
+2-element Vector{Float64}:
  0.25
  0.25
 
@@ -77,7 +77,7 @@ julia> lattice_rule = LatticeRule32(z_file, 16)
 LatticeRule32{16}
 
 julia> getpoint(lattice_rule, 123)
-16-element Array{Float64,1}:
+16-element Vector{Float64}:
  0.8671875
  0.9609375
  0.6015625
@@ -117,7 +117,7 @@ julia> lattice_rule = LatticeRule32(16)
 LatticeRule32{16}
 
 julia> getpoint(lattice_rule, 123)
-16-element Array{Float64,1}:
+16-element Vector{Float64}:
  0.8671875
  0.5390625
  0.6015625

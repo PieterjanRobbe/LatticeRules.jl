@@ -35,7 +35,7 @@ julia> lattice_rule = LatticeRule32(2)
 LatticeRule32{2}
 
 julia> getpoint(lattice_rule, 3)
-2-element Array{Float64,1}:
+2-element Vector{Float64}:
  0.75
  0.25
 
