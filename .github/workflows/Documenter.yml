@@ -4,10 +4,12 @@ on:
     branches: [master]
     tags: [v*]
   pull_request:
+  workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 permissions:
+  actions: write
   contents: write
   pull-requests: read
   statuses: write

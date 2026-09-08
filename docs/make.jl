@@ -4,7 +4,7 @@ using LatticeRules
 makedocs(;
     modules=[LatticeRules],
     authors="Pieterjan Robbe <pieterjan.robbe@kuleuven.be> and contributors",
-    repo="https://github.com/PieterjanRobbe/LatticeRules.jl/blob/{commit}{path}#L{line}",
+    repo=Documenter.Remotes.GitHub("PieterjanRobbe", "LatticeRules.jl"),
     sitename="LatticeRules.jl",
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
