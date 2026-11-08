@@ -29,7 +29,20 @@ jobs:
           - windows-latest
         arch:
           - x64
+        exclude:
+          - os: macOS-latest
+            arch: x64
         include:
+          # macOS-latest runners are Apple Silicon; Julia 1.6 has no native build, so it runs x64 under Rosetta
+          - version: '1.6'
+            os: macOS-latest
+            arch: x64
+          - version: '1'
+            os: macOS-latest
+            arch: aarch64
+          - version: 'nightly'
+            os: macOS-latest
+            arch: aarch64
           # native 32-bit lane to catch typemax(UInt32) + 1 wrap (see PR #5)
           - version: '1'
             os: ubuntu-latest
@@ -40,6 +53,7 @@ jobs:
         with:
           version: ${{ matrix.version }}
           arch: ${{ matrix.arch }}
+          force-arch: ${{ matrix.os == 'macOS-latest' && matrix.arch == 'x64' }}
       - uses: julia-actions/cache@v2
       - uses: julia-actions/julia-buildpkg@v1
       - uses: julia-actions/julia-runtest@v1

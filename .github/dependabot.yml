@@ -7,6 +7,9 @@ updates:
       - "/test"
     schedule:
       interval: "weekly"
+    ignore:
+      # docs/ uses the local checkout of the package, so a compat bound on it only breaks at the next release
+      - dependency-name: "LatticeRules"
 
   - package-ecosystem: "github-actions"
     directory: "/"
